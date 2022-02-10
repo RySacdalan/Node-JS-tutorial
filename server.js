@@ -3,7 +3,13 @@ const http = require("http");
 
 //creating server, hold 2 argument (responce, request)
 const server = http.createServer((req, res) => {
-  console.log("Request are made!");
+  console.log(req.url, req.method);
+
+  //Setting up the header content type
+  res.setHeader("Content-type", "text/html");
+  res.write("<h2>Hello, Ryan Sacdalan!</h2>");
+  res.write("<p>Hello, Ryan Sacdalan!</p>");
+  res.end();
 });
 
 //create a server listening for connections and request, async.
