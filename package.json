@@ -1,0 +1,23 @@
+{
+  "name": "node.js-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RySacdalan/Node-JS-tutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RySacdalan/Node-JS-tutorial/issues"
+  },
+  "homepage": "https://github.com/RySacdalan/Node-JS-tutorial#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

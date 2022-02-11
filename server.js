@@ -1,10 +1,13 @@
 //to use http module, one must require it.
 const http = require("http");
 const fs = require("fs");
+const _ = require("lodash");
 
 //creating server, hold 2 argument (responce, request)
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
+  //lodash package
+  const num = _.random(0, 22);
+  console.log(num);
 
   //Setting up the header content type
   res.setHeader("Content-type", "text/html");
