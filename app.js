@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   const blogs = [
     { title: "Yoshi find eggs", snippet: "lorem random word because im lazy" },
     {
-      titles: "Mario find stars",
+      title: "Mario find stars",
       snippet: "lorem random word because im lazy",
     },
     {
