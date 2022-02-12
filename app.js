@@ -10,17 +10,27 @@ app.set("view engine", "ejs");
 app.listen(3000);
 
 app.get("/", (req, res) => {
-  //res.send("<p>This is from app.js</p>");
-  res.render("index");
+  const blogs = [
+    { title: "Yoshi find eggs", snippet: "lorem random word because im lazy" },
+    {
+      titles: "Mario find stars",
+      snippet: "lorem random word because im lazy",
+    },
+    {
+      title: "How to defeat bowsers",
+      snippet: "lorem random word because im lazy",
+    },
+  ];
+  res.render("index", { title: "Home", blogs });
 });
 
 app.get("/about", (req, res) => {
   //res.send("<p>This is from about page</p>");
-  res.render("about");
+  res.render("about", { title: "About" });
 });
 
 app.get("/blogs/create", (req, res) => {
-  res.render("create");
+  res.render("create", { title: "Create" });
 });
 
 //redirects
@@ -30,5 +40,5 @@ app.get("/about-us", (req, res) => {
 
 //404 redirects
 app.use((req, res) => {
-  res.status(404).render("404");
+  res.status(404).render("404", { title: "404" });
 });
