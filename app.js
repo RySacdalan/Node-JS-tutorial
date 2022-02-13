@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 
 //creating express app
 const app = express();
@@ -9,19 +10,9 @@ app.set("view engine", "ejs");
 //create listener for request
 app.listen(3000);
 
-//creating middleware
-app.use((req, res, next) => {
-  console.log("New request made");
-  console.log("host: ", req.hostname);
-  console.log("path: ", req.path);
-  console.log("method: ", req.method);
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log("From the next middleware");
-  next();
-});
+//middleware and static files
+app.use(express.static("public"));
+app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   const blogs = [
