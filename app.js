@@ -21,53 +21,64 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(morgan("dev"));
 
-//mongoose and mongo sandbox routes
-app.get("/add-blog", (req, res) => {
-  const blog = new Blog({
-    title: "Another blog",
-    snippet: "About my new blog",
-    body: "This is way more about my blog",
-  });
+// //mongoose and mongo sandbox routes
+// app.get("/add-blog", (req, res) => {
+//   const blog = new Blog({
+//     title: "Another blog",
+//     snippet: "About my new blog",
+//     body: "This is way more about my blog",
+//   });
 
-  blog
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+//   blog
+//     .save()
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 
-app.get("/all-blogs", (req, res) => {
-  Blog.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+// app.get("/all-blogs", (req, res) => {
+//   Blog.find()
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 
-//routes
+// //finding single blog
+// app.get("/single-blog", (req, res) => {
+//   Blog.findById("620bad69d50e1034ffa51502")
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
+// basic routes
 app.get("/", (req, res) => {
-  const blogs = [
-    { title: "Yoshi find eggs", snippet: "lorem random word because im lazy" },
-    {
-      title: "Mario find stars",
-      snippet: "lorem random word because im lazy",
-    },
-    {
-      title: "How to defeat bowsers",
-      snippet: "lorem random word because im lazy",
-    },
-  ];
-  res.render("index", { title: "Home", blogs });
+  res.redirect("/blogs");
 });
 
 app.get("/about", (req, res) => {
-  //res.send("<p>This is from about page</p>");
   res.render("about", { title: "About" });
+});
+
+//blogs routes
+app.get("/blogs", (req, res) => {
+  Blog.find()
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("index", { title: "All Blogs", blogs: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.get("/blogs/create", (req, res) => {
