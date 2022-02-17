@@ -19,6 +19,7 @@ app.set("view engine", "ejs");
 
 //middleware and static files
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 // //mongoose and mongo sandbox routes
@@ -69,12 +70,26 @@ app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
 
-//blogs routes
+//**BLOG ROUTES**
+//get method
 app.get("/blogs", (req, res) => {
   Blog.find()
     .sort({ createdAt: -1 })
     .then((result) => {
       res.render("index", { title: "All Blogs", blogs: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+//post method
+app.post("/blogs", (req, res) => {
+  const blog = new Blog(req.body);
+  blog
+    .save()
+    .then((result) => {
+      res.redirect("/blogs");
     })
     .catch((err) => {
       console.log(err);
