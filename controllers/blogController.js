@@ -20,7 +20,7 @@ const blog_details = (req, res) => {
       res.render("details", { blog: result, title: "Blog details" });
     })
     .catch((err) => {
-      console.log(err);
+      res.status(404).render("404", { title: "404" });
     });
 };
 
