@@ -70,6 +70,10 @@ app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
 
+app.get("/blogs/create", (req, res) => {
+  res.render("create", { title: "Create" });
+});
+
 //**BLOG ROUTES**
 //get method
 app.get("/blogs", (req, res) => {
@@ -96,8 +100,16 @@ app.post("/blogs", (req, res) => {
     });
 });
 
-app.get("/blogs/create", (req, res) => {
-  res.render("create", { title: "Create" });
+//get single blog *route parameters*
+app.get("/blogs/:id", (req, res) => {
+  const id = req.params.id;
+  Blog.findById(id)
+    .then((result) => {
+      res.render("details", { blog: result, title: "Blog details" });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 //redirects
